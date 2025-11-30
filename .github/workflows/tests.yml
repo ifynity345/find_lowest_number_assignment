@@ -1,0 +1,32 @@
+name: Run Lowest Number Tests
+
+on:
+  push:
+
+jobs:
+  test-lowest-number:
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+
+    - name: Test 1 - Ten numbers
+      run: |
+        python3 find_lowest_number.py test_data/test1_input.txt output1.txt
+        diff output1.txt test_data/test1_expected.txt
+
+    - name: Test 2 - One number
+      run: |
+        python3 find_lowest_number.py test_data/test2_input.txt output2.txt
+        diff output2.txt test_data/test2_expected.txt
+
+    - name: Test 3 - Blank file
+      run: |
+        python3 find_lowest_number.py test_data/test3_input.txt output3.txt
+        diff output3.txt test_data/test3_expected.txt
